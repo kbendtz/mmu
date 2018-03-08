@@ -1,0 +1,99 @@
+# MMU 
+from psychopy import visual, core, event, sound  # import some libraries from PsychoPy
+import psychopy.gui
+import socket
+#from psychopy import prefs
+#prefs.general['audioLib'] = ['pygame']
+
+
+computer = socket.gethostname()
+
+#create a window
+my_win = visual.Window([1600,1600], color = (1,1,1), monitor="testMonitor", units="pix")
+
+
+# Paths
+image_path = ""
+sound_path = ""
+if computer == "Rasputin":
+    image_path = "/Users/katbendtz/Dropbox/Research/CIV/MMU/Implementation/Images/"
+    sound_path = "/Users/katbendtz/Dropbox/Research/CIV/MMU/Implementation/Sound/"
+else:
+    image_path = "/Users/bendtz/Dropbox/Research/CIV/MMU/Implementation/Images/"
+    sound_path = "/Users/bendtz/Dropbox/Research/CIV/MMU/Implementation/Sound/"
+    
+
+face_1_img_1 = visual.ImageStim(my_win)
+face_1_img_1.setImage(image_path + "Face1_Listening.png")
+
+face_1_img_2 = visual.ImageStim(my_win)
+face_1_img_2.setImage(image_path + "Face1_Do_not_understand.png")
+
+face_1_img_3 = visual.ImageStim(my_win)
+face_1_img_3.setImage(image_path + "Face1_Understand.png")
+
+
+face_2_img_1 = visual.ImageStim(my_win)
+face_2_img_1.setImage(image_path + "Face2_talking_neutral.png")
+
+face_2_img_2 = visual.ImageStim(my_win)
+face_2_img_2.setImage(image_path + "Face2_asking_for_input.png")
+
+### trial 1 ###
+
+face_2_sound_1 = sound.Sound(sound_path + "Face2_sound.wav")
+face_2_sound_1.play()
+
+face_2_img_1.size = face_2_img_1.size*0.5
+face_2_img_1.draw()
+
+my_win.flip()
+core.wait(6)
+
+face_2_img_2.size = face_2_img_2.size*0.5
+face_2_img_2.draw()
+
+my_win.flip()
+core.wait(2)
+
+# Create a dialoge box for participant input
+
+
+### trial 2 ###
+
+face_1_sound_1 = sound.Sound(sound_path + "Face1_sound.wav")
+face_1_sound_1.play()
+
+face_1_img_1.size = face_1_img_1.size*0.25
+face_1_img_1.draw()
+
+my_win.flip()
+core.wait(2)
+
+face_1_img_2.size = face_1_img_2.size*0.5
+face_1_img_2.draw()
+
+my_win.flip()
+core.wait(2)
+
+## trial 3 ###
+
+face_1_sound_1 = sound.Sound(sound_path + "Face1_sound.wav")
+face_1_sound_1.play()
+
+face_1_img_1.size = face_2_img_1.size*0.5
+face_1_img_1.draw()
+
+my_win.flip()
+core.wait(2)
+
+face_1_img_3.size = face_2_img_2.size*0.5
+face_1_img_3.draw()
+
+my_win.flip()
+core.wait(1.5)
+
+
+#cleanup
+my_win.close()
+core.quit()
